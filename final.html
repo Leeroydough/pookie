@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://th.bing.com/th/id/R.0f1b970f2713d035c62784c18e0e9629?rik=9gjl%2bqT5ETfwqA&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-position: center;
+            color: #880e4f;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensures the body takes full height */
+            padding-bottom: 100px; /* Add space at the bottom for scrolling */
+        }
+        .hero {
+            min-height: 100vh; /* Ensures the hero section takes full height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero h1 {
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red, 0 0 40px red;
+        }
+
+        .popup-button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #ff0000; /* Set to red */
+            border: none;
+            border-radius: 8px; /* Round corners */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+        }
+
+        .popup-button:hover {
+            background-color: #d40000; /* Darker red on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        /* Flipbook styles */
+        .flipbook {
+            width: 90%;
+            max-width: 700px;
+            margin: 50px auto;
+            perspective: 1500px;
+            position: relative;
+        }
+
+        .page {
+            width: 100%;
+            height: 300px;
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: transform 1s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .page-content {
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        .page:nth-child(2) {
+            transform: rotateY(-180deg);
+        }
+
+        .flipped:nth-child(2) {
+            transform: rotateY(0);
+        }
+
+        .flipped:nth-child(1) {
+            transform: rotateY(180deg);
+        }
+
+        .flipbook-controls {
+            margin-top: 20px;
+        }
+
+        .flipbook-controls button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #880e4f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .page button {
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #880e4f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .page button:hover {
+            background-color: #d81b60;
+        }
+
+        /* Styles for hidden message and video */
+        .hidden-message {
+            display: none;
+            background-color: #ffe0b2;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Responsive iframe */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>Happy Birthday, My Love!</h1>
+        <button class="popup-button" onclick="revealMessage()">Click for a Surprise</button>
+        <div class="hidden-message" id="hidden-message">
+            <h2>You are my everything! 💖</h2>
+            <!-- YouTube video -->
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/b_xsf8wHVDs?si=VE1oUeVv1eG2tdqJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flipbook -->
+    <div class="flipbook" id="flipbook">
+        <!-- Page 1 -->
+        <div class="page" id="page-1">
+            <div class="page-content">
+                <h2>My Dearest Love,</h2>
+                <p>On this special day, I want to take a moment to remind you just how much you mean to me. Words can never fully capture the depth of my feelings for you, but I'll try my best to show you through this letter.</p>
+            </div>
+            <button onclick="nextPage()">Next Page</button>
+        </div>
+        <!-- Page 2 -->
+        <div class="page" id="page-2">
+            <div class="page-content">
+                <p>Since the moment we met, my world has been brighter, filled with more laughter, love, and joy than I ever thought possible. You bring a light into my life that shines even on the darkest days.</p>
+            </div>
+            <div>
+                <button onclick="prevPage()">Previous Page</button>
+                <button onclick="nextPage()">Next Page</button>
+            </div>
+        </div>
+        <!-- Page 3 -->
+        <div class="page" id="page-3">
+            <div class="page-content">
+                <p>You are more than just the love of my life—you are my best friend, my confidant, my everything. I am still amazed by your kindness, your strength, and your beauty, inside and out.</p>
+            </div>
+            <div>
+                <button onclick="prevPage()">Previous Page</button>
+                <button onclick="nextPage()">Next Page</button>
+            </div>
+        </div>
+        <!-- Page 4 -->
+        <div class="page" id="page-4">
+            <div class="page-content">
+                <p>Every day with you is a gift that I treasure, and I can’t wait for all the moments we still have ahead of us. I promise to love you more each day and cherish every moment we share.</p>
+            </div>
+            <div>
+                <button onclick="prevPage()">Previous Page</button>
+                <button onclick="nextPage()">Next Page</button>
+            </div>
+        </div>
+        <!-- Page 5 -->
+        <div class="page" id="page-5">
+            <div class="page-content">
+                <p>With all my love</p>
+                <p>mi corazón</p>
+                <h3>Happy Birthday Pookie🥹❤️</h3>
+            </div>
+            <div>
+                <button onclick="prevPage()">Previous Page</button>
+                <button onclick="nextPage()">Next Page</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+        const totalPages = pages.length;
+
+        function updatePages() {
+            pages.forEach((page, index) => {
+                if (index === currentPage) {
+                    page.style.transform = 'rotateY(0deg)';
+                } else if (index < currentPage) {
+                    page.style.transform = 'rotateY(180deg)';
+                } else {
+                    page.style.transform = 'rotateY(-180deg)';
+                }
+            });
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                updatePages();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePages();
+            }
+        }
+
+        function revealMessage() {
+            const message = document.getElementById('hidden-message');
+            message.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
